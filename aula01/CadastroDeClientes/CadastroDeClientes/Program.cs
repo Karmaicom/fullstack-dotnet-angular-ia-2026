@@ -1,4 +1,5 @@
-﻿using CadastroDeClientes.Entidades;
+﻿using CadastroDeClientes.Entities;
+using CadastroDeClientes.Services;
 
 namespace CadastroDeClientes
 {
@@ -33,6 +34,9 @@ namespace CadastroDeClientes
             Console.WriteLine("\tCPF..........................: " + cliente.Cpf);
             Console.WriteLine("\tTelefone.....................: " + cliente.Telefone);
             Console.WriteLine("\tData e hora do cadastro......: " + cliente.DataHoraCadastro);
+
+            var service = new ClienteService();
+            service.ExportarDados(cliente);
         }
     }
 }

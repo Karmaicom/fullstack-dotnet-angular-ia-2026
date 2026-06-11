@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CadastroDeClientes.Entidades
+namespace CadastroDeClientes.Entities
 {
     public class Cliente
     {
