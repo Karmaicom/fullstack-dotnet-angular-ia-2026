@@ -35,8 +35,24 @@ namespace CadastroDeClientes
             Console.WriteLine("\tTelefone.....................: " + cliente.Telefone);
             Console.WriteLine("\tData e hora do cadastro......: " + cliente.DataHoraCadastro);
 
+            Console.Write("\nDeseja salvar os dados do cliente em arquivo? (S, N): ");
+            var opcao = Console.ReadLine() ?? string.Empty;
+
             var service = new ClienteService();
-            service.ExportarDados(cliente);
+
+            switch (opcao.ToUpper())
+            {
+                case "S":
+                    service.ExportarDados(cliente);
+                    Console.WriteLine("\nDados do cliente salvos com sucesso!");
+                    break;
+                case "N":
+                    Console.WriteLine("\nDados do cliente não foram salvos.");
+                    break;
+                default:
+                    Console.WriteLine("\nOpção inválida. Dados do cliente não foram salvos.");
+                    break;
+            }
         }
     }
 }
