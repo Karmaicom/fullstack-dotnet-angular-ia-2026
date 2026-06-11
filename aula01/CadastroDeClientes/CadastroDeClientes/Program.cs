@@ -38,9 +38,11 @@ namespace CadastroDeClientes
             Console.Write("\nDeseja salvar os dados do cliente em arquivo? (S, N): ");
             var opcao = Console.ReadLine() ?? string.Empty;
 
+            // Instanciando um objeto do tipo ClienteService para acessar os métodos implementados
             var service = new ClienteService();
 
-            switch (opcao.ToUpper())
+            // Verificando a opção escolhida pelo usuário para salvar ou não os dados do cliente
+            switch (opcao.ToUpper()) // Convertendo a opção para maiúscula para não haver erro na identificação da opção escolhida
             {
                 case "S":
                     service.ExportarDados(cliente);
