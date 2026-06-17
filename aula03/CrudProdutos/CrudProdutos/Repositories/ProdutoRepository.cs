@@ -58,7 +58,7 @@ namespace CrudProdutos.Repositories
 
             using (var connection = new SqlConnection(connectionString))
             {
-                connection.Execute(query, new { Id = id});
+                connection.Execute(query, new { @Id = id});
             }
         }
 
