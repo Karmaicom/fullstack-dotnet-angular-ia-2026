@@ -6,11 +6,7 @@ namespace CrudProdutos.Repositories
 {
     public class ProdutoRepository
     {
-        private string connectionString = @"
-                        Data Source=localhost,1433;Initial Catalog=bd_produtos;
-                        User ID=sa;Password=Coti@2026;Connect Timeout=30;
-                        Encrypt=True;Trust Server Certificate=True;Application 
-                        Intent=ReadWrite;Multi Subnet Failover=False;Command Timeout=30";
+        private string connectionString = @"Data Source=localhost,1433;Initial Catalog=bd_produtos;User ID=sa;Password=Coti@2026;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False;Command Timeout=30";
 
         public void Inserir(Produto produto)
         {
@@ -29,7 +25,7 @@ namespace CrudProdutos.Repositories
             try
             {
                 var query = @"select id, nome, preco, quantidade, datahoracadastro 
-                                from produtos
+                                from produto
                                 order by nome";
 
                 using (var connection = new SqlConnection(connectionString))
@@ -47,7 +43,7 @@ namespace CrudProdutos.Repositories
         public Produto? ObterPorId(Guid id)
         {
             var query = @"select id, nome, preco, quantidade, datahoracadastro 
-                            from produtos 
+                            from produto
                             where id = @Id";
 
             using (var connection = new SqlConnection(connectionString))
@@ -58,7 +54,7 @@ namespace CrudProdutos.Repositories
 
         public void Alterar(Produto produto)
         {
-            var query = @"update from produtos set nome = @Nome, preco = @Preco, quantidade = @Quantidade
+            var query = @"update produto set nome = @Nome, preco = @Preco, quantidade = @Quantidade
                             where id = @Id";
 
             using (var connection = new SqlConnection(connectionString))
@@ -69,7 +65,7 @@ namespace CrudProdutos.Repositories
 
         public void Excluir(Guid id)
         {
-            var query = @"delete from produtos where id = @Id";
+            var query = @"delete from produto where id = @Id";
 
             using (var connection = new SqlConnection(connectionString))
             {
