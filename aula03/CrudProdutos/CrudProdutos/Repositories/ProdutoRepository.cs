@@ -52,5 +52,15 @@ namespace CrudProdutos.Repositories
             }
         }
 
+        public void Excluir(Guid id)
+        {
+            var query = @"delete from produtos where id = @Id";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Execute(query, new { Id = id});
+            }
+        }
+
     }
 }
