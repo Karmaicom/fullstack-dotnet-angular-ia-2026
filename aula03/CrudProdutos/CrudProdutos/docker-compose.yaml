@@ -1,0 +1,47 @@
+version: '3.9'
+
+services:
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver-dev
+    hostname: sqlserver-dev
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+      MSSQL_SA_PASSWORD: "Coti@2026"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - backend-network
+
+  sqlpad:
+    image: sqlpad/sqlpad:latest
+    container_name: sqlpad
+    restart: unless-stopped
+    depends_on:
+      - sqlserver
+    environment:
+      SQLPAD_ADMIN: admin@local.com
+      SQLPAD_ADMIN_PASSWORD: Coti@2026
+    ports:
+      - "3000:3000"
+    volumes:
+      - sqlpad_data:/var/lib/sqlpad
+    networks:
+      - backend-network
+
+volumes:
+  sqlserver_data:
+    name: sqlserver_data
+
+  sqlpad_data:
+    name: sqlpad_data
+
+networks:
+  backend-network:
+    name: backend-network
+    driver: bridge
