@@ -24,11 +24,14 @@ namespace CrudProdutos.Repositories
             }                
         }
 
-        public List<Produto> Listar()
+        public List<Produto> Consultar()
         {
             try
             {
-                var query = @"select id, nome, preco, quantidade, datahoracadastro from produtos";
+                var query = @"select id, nome, preco, quantidade, datahoracadastro 
+                                from produtos
+                                order by nome";
+
                 using (var connection = new SqlConnection(connectionString))
                 {
                     return connection.Query<Produto>(query).ToList();
@@ -39,6 +42,18 @@ namespace CrudProdutos.Repositories
                 Console.WriteLine(ex.Message);
                 return null;
             }            
+        }
+
+        public Produto? ObterPorId(Guid id)
+        {
+            var query = @"select id, nome, preco, quantidade, datahoracadastro 
+                            from produtos 
+                            where id = @Id";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                return connection.Query<Produto>(query, new { @Id = id }).FirstOrDefault();
+            }
         }
 
         public void Alterar(Produto produto)
